@@ -21,5 +21,6 @@ object Boot extends App {
   implicit val timeout = Timeout(5.seconds)
   // start a new HTTP server with our service actor as the handler
   // this will be used to receive request from the front-end server
-  IO(Http) ? Http.Bind(service, interface = "localhost", port = Properties.envOrElse("PORT", "8091").toInt)
+  //IO(Http) ? Http.Bind(service, interface = "localhost", port = Properties.envOrElse("PORT", "8091").toInt)
+  IO(Http) ? Http.Bind(service, interface = "localhost", port = sys.env.get("PORT").map(_.toInt).getOrElse(8080))
 }
