@@ -1,3 +1,5 @@
+import com.typesafe.sbt.SbtStartScript
+
 organization  := "com.articlio"
 
 version       := "0.1"
@@ -19,5 +21,6 @@ libraryDependencies ++= {
   )
 }
 
-Revolver.settings
+seq(SbtStartScript.startScriptForClassesSettings: _*)
 
+Revolver.settings
