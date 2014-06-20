@@ -7,4 +7,4 @@ src_managed/
 test-output/
 *.iml
 .classpath_nb
-vert.x-2.1.1/
+/vert.x-2.1.1
