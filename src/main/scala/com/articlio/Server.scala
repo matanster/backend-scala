@@ -1,10 +1,21 @@
+val client = vertx.createHttpClient.setPort(3080).setHost("localhost")
+
+//
+// http response handler
+//
 vertx.createHttpServer.requestHandler { req: HttpServerRequest =>
   container.logger.info("request received")
-  req.response.end("This is a Verticle script")
+  req.response.setChunked(true)
+  req.response.write("Verticle script received request\n")
+
+  //
+  // make request to node.js backend
+  //
+  client.getNow("/handleInputFile/?localLocation=LaeUusATIi5FHXHmF4hU", { response: HttpClientResponse =>
+    response.bodyHandler({ data: Buffer =>
+      container.logger.info("Got a response: " + response.statusCode())
+      req.response.end("Verticle script finished handling request")
+    })
+  })
 }.listen(sys.env.get("PORT").map(_.toInt).getOrElse(8091))
 
-vertx.createHttpClient.setPort(3080).setHost("localhost").getNow("/", { response: HttpClientResponse =>
-  response.bodyHandler({ data: Buffer =>
-    container.logger.info("response received")
-  })
-})
