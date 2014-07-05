@@ -4,6 +4,10 @@ organization  := "com.articlio"
 
 version       := "0.1"
 
+//
+// akka & spray
+//
+
 scalaVersion  := "2.10.3"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
@@ -24,3 +28,19 @@ libraryDependencies ++= {
 seq(SbtStartScript.startScriptForClassesSettings: _*)
 
 Revolver.settings
+
+//
+// Vertx
+//
+
+// vertx-scala doesn't ship on 2.9
+// scalaVersion := "2.10.2"
+
+// Fork required to avoid conflicts when compiling the .scala source on the fly
+// fork := true
+
+libraryDependencies ++= Seq(
+  // If changing lang-scala version, make sure src/main/resources/langs.properties is updated too
+  "io.vertx" % "lang-scala" % "0.3.+" changing(),
+  "io.vertx" % "vertx-platform" % "2.1M1"
+)
