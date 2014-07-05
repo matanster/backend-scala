@@ -1,10 +1,20 @@
-/.idea/
-/project/boot/
-/project/plugins/project
+vert.x-2.1.1/
+
 target/
-lib_managed/
-src_managed/
 test-output/
 *.iml
 .classpath_nb
-vert.x-2.1.1/
+
+# sbt specific
+/project/boot/
+/project/plugins/project
+lib_managed/
+src_managed/
+
+# Eclipse specific
+.project
+.classpath
+.cache
+
+# idea specific
+/.idea/
