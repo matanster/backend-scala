@@ -1,5 +1,6 @@
 package com.articlio
 
+import java.util.{Map=>JMap}
 import org.vertx.scala.core._
 import org.vertx.scala.core.http.HttpServerRequest
 import org.vertx.scala.core.http.HttpClientResponse
@@ -33,7 +34,11 @@ class articlioScala extends Verticle {
       container.logger.info(req.path)
       container.logger.info(req.params)
 
-      container.logger.info(req.params.Map{case (k, v) => vs.map((k, _))}.flatten)
+      val sb = new StringBuilder()
+      for ( pair <- req.params.entries().asInstanceOf[List[JMap.Entry[String, String]]]) {
+        sb.append(pair.getKey()).append(": ").append(pair.getValue()).append("\n")
+      }
+      container.logger.info(sb.toString())
 
       //
       // make request to node.js backend
