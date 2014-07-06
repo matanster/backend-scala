@@ -20,3 +20,4 @@ src_managed/
 
 # idea specific
 /.idea/
+/bin
