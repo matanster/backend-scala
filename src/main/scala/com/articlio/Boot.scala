@@ -10,6 +10,9 @@ import util.Properties
 
 object Boot extends App {
 
+  val a = new deployer
+  a.start
+  
   // we need an ActorSystem to host our application in
  
   //IO(Http) ? Http.Bind(service, interface = "0.0.0.0", port = sys.env.get("PORT").map(_.toInt).getOrElse(8091))
