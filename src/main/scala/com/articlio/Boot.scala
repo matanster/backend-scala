@@ -9,9 +9,6 @@ import scala.concurrent.duration._
 import util.Properties
 
 object Boot extends App {
-
-  val a = new deployer
-  a.start
   
   // we need an ActorSystem to host our application in
  

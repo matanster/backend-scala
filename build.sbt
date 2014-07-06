@@ -28,7 +28,10 @@ libraryDependencies ++= {
 seq(SbtStartScript.startScriptForClassesSettings: _*)
 
 Revolver.settings
+
 mainClass in Revolver.reStart := Some("org.vertx.java.platform.impl.cli.Starter")
+
+Revolver.reStartArgs := Seq("run", "scala:com.articlio.deployer")
 
 //
 // Vertx
@@ -45,3 +48,6 @@ libraryDependencies ++= Seq(
   "io.vertx" % "lang-scala" % "0.3.+" changing(),
   "io.vertx" % "vertx-platform" % "2.1M1"
 )
+
+// spray-json
+libraryDependencies += "io.spray" %%  "spray-json" % "1.2.6"
