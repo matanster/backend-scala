@@ -39,4 +39,3 @@ class articlioScala extends Verticle {
     }.listen(sys.env.get("PORT").map(_.toInt).getOrElse(8091))
   }
 }
-

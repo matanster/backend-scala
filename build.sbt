@@ -28,6 +28,7 @@ libraryDependencies ++= {
 seq(SbtStartScript.startScriptForClassesSettings: _*)
 
 Revolver.settings
+mainClass in Revolver.reStart := Some("org.vertx.java.platform.impl.cli.Starter")
 
 //
 // Vertx
