@@ -6,6 +6,7 @@ import org.vertx.scala.core.http.HttpServerRequest
 import org.vertx.scala.core.http.HttpClientResponse
 import org.vertx.scala.platform.Verticle
 import org.vertx.scala.core.buffer.Buffer
+import java.net.URLEncoder
 
 import spray.json._
 import DefaultJsonProtocol._
@@ -45,7 +46,11 @@ class articlioScala extends Verticle {
       //
       // make request to node.js backend
       //
-      client.getNow("/handleInputFile/?localLocation=LaeUusATIi5FHXHmF4hU", { response: HttpClientResponse =>
+
+      val requestUrl: String = "/handleInputFile/?localLocation=" + URLEncoder.encode("To Belong or Not to Belong, That Is the Question", "UTF-8")
+      container.logger.info(requestUrl)
+
+      client.getNow(requestUrl, { response: HttpClientResponse => // LaeUusATIi5FHXHmF4hU
         response.bodyHandler({ data: Buffer =>
           container.logger.info("Got a response: " + response.statusCode())
           //container.logger.info(data)
@@ -55,6 +60,6 @@ class articlioScala extends Verticle {
     }.listen(sys.env.get("PORT").map(_.toInt).getOrElse(8091))
 
   // invoke self on startup, for iterative development
-  selfInvoker.getNow("/", { HttpClientResponse => } )
+  selfInvoker.getNow("/", { response: HttpClientResponse => })
   }
 }
