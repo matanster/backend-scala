@@ -34,11 +34,13 @@ class articlioScala extends Verticle {
       container.logger.info(req.path)
       container.logger.info(req.params)
 
+      /*
       val sb = new StringBuilder()
       for ( pair <- req.params.entries().asInstanceOf[List[JMap.Entry[String, String]]]) {
         sb.append(pair.getKey()).append(": ").append(pair.getValue()).append("\n")
       }
       container.logger.info(sb.toString())
+      */
 
       //
       // make request to node.js backend
@@ -53,6 +55,6 @@ class articlioScala extends Verticle {
     }.listen(sys.env.get("PORT").map(_.toInt).getOrElse(8091))
 
   // invoke self on startup, for iterative development
-  selfInvoker.getNow("/", { Unit => Unit} )
+  selfInvoker.getNow("/", { HttpClientResponse => } )
   }
 }
